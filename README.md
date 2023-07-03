@@ -1,8 +1,15 @@
-ZenHanConverter
+zen_han_converter
 ===
 
-全角・半角文字を相互変換するツール。
-Pythonの標準モジュールのみで実装。
+# Description
+
+This is a tool for converting full-width and half-width characters to each other, implemented only with Python's standard modules.
+
+# Installaction
+
+```
+pip install zen_han_converter
+```
 
 # Usage
 
