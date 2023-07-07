@@ -1,4 +1,4 @@
-from zen_han_converter.zen_han_convter import ZenToHan, HanToZen
+from zen_han_converter.zen_han_converter import ZenToHan, HanToZen
 
 
 def test_ZenToHan():
