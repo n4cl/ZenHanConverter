@@ -1,7 +1,7 @@
-from han_to_zen_table import LATIN_ALPHABET as HAN2ZEN_LATIN_ALPHABET, \
+from .han_to_zen_table import LATIN_ALPHABET as HAN2ZEN_LATIN_ALPHABET, \
                              ARABIC_NUMERALS as HAN2ZEN_ARABIC_NUMERALS, \
                              ASCII_SYMBOL as HAN2ZEN_ASCII_SYMBOL
-from zen_to_han_table import LATIN_ALPHABET as ZEN2HAN_LATIN_ALPHABET, \
+from .zen_to_han_table import LATIN_ALPHABET as ZEN2HAN_LATIN_ALPHABET, \
                              ARABIC_NUMERALS as ZEN2HAN_ARABIC_NUMERALS, \
                              ASCII_SYMBOL as ZEN2HAN_ASCII_SYMBOL
 
