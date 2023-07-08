@@ -9,6 +9,8 @@ def test_ZenToHan():
     assert zen_to_han.convert('0123456789') == '0123456789'
     assert zen_to_han.convert("！＂＃＄％＆＇（）＊＋，－．／：；＜＝＞？＠［＼］＾＿｀｛｜｝～") == "!\"#$%&'()*+,-./:;<=>?@[\\]^_`{|}~"
     assert zen_to_han.convert("!\"#$%&'()*+,-./:;<=>?@[\\]^_`{|}~") == "!\"#$%&'()*+,-./:;<=>?@[\\]^_`{|}~"
+    assert zen_to_han.convert("　") == " "
+    assert zen_to_han.convert(" ") == " "
 
 
 def test_HanToZen():
@@ -19,3 +21,5 @@ def test_HanToZen():
     assert han_to_zen.convert("０１２３４５６７８９") == "０１２３４５６７８９"
     assert han_to_zen.convert("!\"#$%&'()*+,-./:;<=>?@[\\]^_`{|}~") == "！＂＃＄％＆＇（）＊＋，－．／：；＜＝＞？＠［＼］＾＿｀｛｜｝～"
     assert han_to_zen.convert("！＂＃＄％＆＇（）＊＋，－．／：；＜＝＞？＠［＼］＾＿｀｛｜｝～") == "！＂＃＄％＆＇（）＊＋，－．／：；＜＝＞？＠［＼］＾＿｀｛｜｝～"
+    assert han_to_zen.convert(" ") == "　"
+    assert han_to_zen.convert("　") == "　"

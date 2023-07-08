@@ -3,7 +3,7 @@ from setuptools import setup, find_packages
 
 setup(
     name="zen_han_converter",
-    version="1.0.1",
+    version="1.1.0",
     author="n4cl",
     author_email="devn4cl@gmail.com",
     description="Converts full-width and half-width characters.",
