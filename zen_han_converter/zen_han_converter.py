@@ -1,25 +1,49 @@
-from .han_to_zen_table import LATIN_ALPHABET as HAN2ZEN_LATIN_ALPHABET, \
-                             ARABIC_NUMERALS as HAN2ZEN_ARABIC_NUMERALS, \
-                             ASCII_SYMBOL as HAN2ZEN_ASCII_SYMBOL, \
-                             SPACE as HAN2ZEN_SPACE
-from .zen_to_han_table import LATIN_ALPHABET as ZEN2HAN_LATIN_ALPHABET, \
-                             ARABIC_NUMERALS as ZEN2HAN_ARABIC_NUMERALS, \
-                             ASCII_SYMBOL as ZEN2HAN_ASCII_SYMBOL, \
-                             SPACE as ZEN2HAN_SPACE
-
+from .table import LATIN_ALPHABET, \
+                   ARABIC_NUMERALS, \
+                   ASCII_SYMBOL, \
+                   SPACE
 
 class BaseConverter:
     """
     コンバーターの基底クラス
     """
-    def __init__(self, table):
-        self.table = str.maketrans(table)
+    def __init__(self, alphabet_table, number_table, ascii_symbol_table, space_table, reverse):
+        self.char_to_char_table = {}
+
+        if alphabet_table:
+            _t = self.read_table(LATIN_ALPHABET, reverse)
+            self.char_to_char_table.update(_t)
+        if number_table:
+            _t = self.read_table(ARABIC_NUMERALS, reverse)
+            self.char_to_char_table.update(_t)
+        if ascii_symbol_table:
+            _t = self.read_table(ASCII_SYMBOL, reverse)
+            self.char_to_char_table.update(_t)
+        if space_table:
+            _t = self.read_table(SPACE, reverse)
+            self.char_to_char_table.update(_t)
+
+
+    def read_table(self, table, reverse=False):
+        """
+        変換テーブルを読み込む
+        """
+        if reverse:
+            return {v: k for k, v in table.items()}
+        else:
+            return table
 
     def convert(self, text):
         """
         変換する
         """
-        return text.translate(self.table)
+        result = []
+        for _t in text:
+            if _t in self.char_to_char_table:
+                result.append(self.char_to_char_table[_t])
+            else:
+                result.append(_t)
+        return "".join(result)
 
 
 class ZenToHan(BaseConverter):
@@ -31,16 +55,8 @@ class ZenToHan(BaseConverter):
                  number_table=True,
                  ascii_symbol_table=True,
                  space_table=True):
-        _table = {}
-        if alphabet_table:
-            _table.update(ZEN2HAN_LATIN_ALPHABET)
-        if number_table:
-            _table.update(ZEN2HAN_ARABIC_NUMERALS)
-        if ascii_symbol_table:
-            _table.update(ZEN2HAN_ASCII_SYMBOL)
-        if space_table:
-            _table.update(ZEN2HAN_SPACE)
-        super().__init__(_table)
+        reverse = True
+        super().__init__(alphabet_table, number_table, ascii_symbol_table, space_table, reverse)
 
 
 class HanToZen(BaseConverter):
@@ -52,13 +68,5 @@ class HanToZen(BaseConverter):
                  number_table=True,
                  ascii_symbol_table=True,
                  space_table=True):
-        _table = {}
-        if alphabet_table:
-            _table.update(HAN2ZEN_LATIN_ALPHABET)
-        if number_table:
-            _table.update(HAN2ZEN_ARABIC_NUMERALS)
-        if ascii_symbol_table:
-            _table.update(HAN2ZEN_ASCII_SYMBOL)
-        if space_table:
-            _table.update(HAN2ZEN_SPACE)
-        super().__init__(_table)
+        reverse = False
+        super().__init__(alphabet_table, number_table, ascii_symbol_table, space_table, reverse)
